@@ -8,7 +8,7 @@ using System.Linq;
 //https://github.com/Unity-Technologies/Q-GridWorld/blob/master/Assets/Scripts/InternalAgent.cs
 
 
-public class qLearning : MonoBehaviour
+public class qLearning
 {
     public float[][] q_table;   // The matrix containing the values estimates.
     float learning_rate = 0.5f; // The rate at which to update the value estimates given a reward.
