@@ -23,6 +23,9 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var reward = calculateReward();
+        var state = discretizeState();
+        var motion = qlearner.step(state, reward);
+        this.paddleController.applyMotion(motion);
     }
 }
