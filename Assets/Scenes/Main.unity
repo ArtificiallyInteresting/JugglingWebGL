@@ -550,7 +550,7 @@ PrefabInstance:
     - target: {fileID: 2795599419628592085, guid: 6a9e4d7dc2bfc7b40940d3ace363672d,
         type: 3}
       propertyPath: numPaddles
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2795599419628592085, guid: 6a9e4d7dc2bfc7b40940d3ace363672d,
         type: 3}
