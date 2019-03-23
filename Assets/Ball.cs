@@ -4,16 +4,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float x;
-    public float y;
 
-
-    public Ball(float x, float y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
+    public string lastHitBy = "";
     // Start is called before the first frame update
     void Start()
     {
