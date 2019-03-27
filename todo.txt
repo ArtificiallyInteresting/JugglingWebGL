@@ -1,0 +1,3 @@
+Separate controllers for each paddle
+Improve reward function
+States only consider closest ball

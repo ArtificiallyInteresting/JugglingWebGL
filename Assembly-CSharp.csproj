@@ -67,6 +67,9 @@
     <Compile Include="Assets\Paddle.cs" />
     <Compile Include="Assets\PaddleController.cs" />
     <Compile Include="Assets\qLearning.cs" />
+    <Compile Include="Assets\SeparatePaddlesController.cs" />
+    <Compile Include="Assets\SinglePaddleController.cs" />
+    <Compile Include="Assets\SinglePaddleQLearning.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/henry/UnityProjects/Web Juggling/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

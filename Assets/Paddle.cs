@@ -6,7 +6,8 @@ public class Paddle : MonoBehaviour
 {
     public string paddleName;
     public int reward;
-    public Quaternion originalRotation;
+    public Quaternion originalRotation; 
+    public Vector2 originalPosition; 
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,10 @@ public class Paddle : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Ball ball = collision.gameObject.GetComponent<Ball>();
+        if (ball == null)
+        {
+            return;
+        }
         if (ball.lastHitBy == paddleName)
         {
             reward = -100;

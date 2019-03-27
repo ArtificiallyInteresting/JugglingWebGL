@@ -7,11 +7,10 @@ public class Main : MonoBehaviour
     public int numBalls = 1;
     public int numPaddles = 1;
     BallController ballController;
-    PaddleController paddleController;
+    SeparatePaddlesController paddleController;
     public Paddle paddle;
     public Ball ball;
-    qLearning qlearner;
-    public int updateEveryXFrames = 4;
+    public int updateEveryXFrames = 10;
     private int frameNo;
     // Start is called before the first frame update
     void Start()
@@ -21,9 +20,9 @@ public class Main : MonoBehaviour
         Application.targetFrameRate = 60;
         ballController = ScriptableObject.CreateInstance<BallController>();
         ballController.init(numBalls, ball);
-        paddleController = ScriptableObject.CreateInstance<PaddleController>();
-        paddleController.init(numPaddles, paddle);
-        qlearner = new qLearning(10000);
+        paddleController = ScriptableObject.CreateInstance<SeparatePaddlesController>();
+        //paddleController.init(numPaddles, paddle);
+        paddleController.init(paddle);
     }
 
     // Update is called once per frame
@@ -31,36 +30,32 @@ public class Main : MonoBehaviour
     {
         if (frameNo++ % updateEveryXFrames == 0)
         {
-            var reward = calculateReward();
-            var state = discretizeState();
-            qlearner.SendState(state, reward, false);
-            var motion = qlearner.GetAction();
-            //Debug.Log(motion[0]);
-            //Debug.Log(motion[1]);
-            this.paddleController.applyMotion(motion);
+            //var reward = calculateReward();
+            //var state = discretizeState();
+            paddleController.update(ballController);
         }
 
     }
 
-    string discretizeState()
-    {
-        var state = "";
-        state += this.ballController.getStateString();
-        state += this.paddleController.getStateString();
-        return state;
-    }
+    //string discretizeState()
+    //{
+    //    var state = "";
+    //    state += this.ballController.getStateString();
+    //    state += this.paddleController.getStateString();
+    //    return state;
+    //}
 
-    float calculateReward()
-    {
-        float score = ballController.averageBallHeight();
-        score += paddleController.getPaddleRewards();
-        return score;
-    }
+    //float calculateReward()
+    //{
+    //    float score = ballController.averageBallHeight();
+    //    score += paddleController.getPaddleRewards();
+    //    return score;
+    //}
 
     public void outOfBounds(Collider2D collision)
     {
-        var state = discretizeState();
-        qlearner.SendState(state, -9999999, true);
+        //var state = discretizeState();
+        //qlearner.SendState(state, -9999999, true);
         this.paddleController.reset();
         this.ballController.reset();
     }

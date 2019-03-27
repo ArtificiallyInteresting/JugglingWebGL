@@ -9,6 +9,7 @@ public class PaddleController : ScriptableObject
     List<Paddle> paddles = new List<Paddle>();
     private List<Vector2> paddlePositions;
     private List<float> paddleRotations;
+    public static int paddleNo = 1;
 
     public void init(int numPaddles, Paddle paddle)
     {
@@ -23,9 +24,8 @@ public class PaddleController : ScriptableObject
             newPaddle.originalRotation = Quaternion.Euler(new Vector3(0, 0, paddleRotations[i]));
             this.paddles.Add(newPaddle);
         }
-
-
     }
+
 
     public float getPaddleRewards()
     {

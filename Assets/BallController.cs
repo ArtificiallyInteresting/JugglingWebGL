@@ -9,7 +9,7 @@ public class BallController : ScriptableObject
 
     public void init(int numBalls, Ball ball)
     {
-        ballPositions = new List<Vector2> { new Vector2(-5f, 3.5f), new Vector2(5f, 0f), new Vector2(-5f, -3.5f) };
+        ballPositions = new List<Vector2> { new Vector2(-5f, 1f), new Vector2(5f, 0f), new Vector2(-5f, -3.5f) };
         for (int i = 0; i < numBalls; i++)
         {
             Ball newBall = Instantiate(ball, ballPositions[i], Quaternion.identity);
@@ -18,19 +18,30 @@ public class BallController : ScriptableObject
 
     }
 
-    public string getStateString()
+    public Ball getClosestBall(Vector3 position)
     {
-        var state = "Balls|x";
-        var posScale = .8;
-        var velocityScale = 1;
+        float closestDistance = 9999999999f;
+        Ball closestBall = balls[0];
         foreach (Ball ball in this.balls)
         {
             var pos = ball.transform.position;
-            var velocity = ball.GetComponent<Rigidbody2D>().velocity;
-            state += (int)(pos.x * posScale) + "_y";
-            state += (int)(pos.y * posScale) + "_dx";
-            state += (int)(velocity.x * velocityScale) + "_dy";
-            state += (int)(velocity.y * velocityScale) + "|";
+            var distance = pos - position;
+            if (distance.magnitude < closestDistance)
+            {
+                closestDistance = distance.magnitude;
+                closestBall = ball;
+            }
+        }
+        return closestBall;
+
+    }
+
+    public string getStateString()
+    {
+        var state = "Balls|";
+        foreach (Ball ball in this.balls)
+        {
+            state += ball.getStateString();
         }
         return state;
     }
